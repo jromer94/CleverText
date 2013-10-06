@@ -10,6 +10,7 @@ from chatterbotapi import ChatterBotFactory, ChatterBotType
 
 from twilio import twiml
 from twilio.util import TwilioCapability
+from twilio.rest import TwilioRestClient
 
 # Declare and configure application
 app = Flask(__name__, static_url_path='/static')
@@ -101,10 +102,15 @@ def client_incoming():
 # Installation success page
 @app.route('/')
 def index():
-    params = {
-        'Voice Request URL': url_for('.voice', _external=True),
-        'SMS Request URL': url_for('.sms', _external=True),
-        'Client URL': url_for('.client', _external=True)}
-    return render_template('index.html', params=params,
+   
+  number = request.args.get("number", "")
+  message = request.args.get("message", "")
+  
+  if number != "" and message != "":
+    account_sid = "AC3df8076d344e7eac28b16b5f21f7da3f"; 
+    account_token = "10321a0278515f350e3a6965b117e5e7";
+    client = TwilioRestClient(account_sid, account_token);
+    message = client.messages.create(body= message, to=number, from_="+16092574790")
+  return render_template('index.html',
             configuration_error=None)
 
