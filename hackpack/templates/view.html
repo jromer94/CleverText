@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}A New Friend{% endblock %}
+
+{% block blurb %}A New Friend{% endblock
+%}
+
+{% block content %}
+<div align ='center' >
+  <form action= {{url_for('view')}} method = 'get'> 
+
+   <input type="text" name="number" placeholder= "Phone Number">
+
+   <button type="submit">Find Conversation</button>
+
+  </form> 
+  <div style="text-align: left; background-color: white; width:450px;height:150px;line-height:3em;overflow:auto;padding:5px;style="width:150px;height:150px;line-height:3em;overflow:auto;padding:5px;"">
+
+    {% for a,b in params %}
+        <dt> CleverBot: {{a.body}} </dt>
+        <dt> Them: {{b.body}} </dt>
+    {% endfor %}
+
+  </div>
+</div>     
+{% endblock %}
