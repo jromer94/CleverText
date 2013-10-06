@@ -6,7 +6,7 @@
 %}
 
 {% block content %}
-
+<div align= "center">
   <form action= {{url_for('index')}} method = 'get'> 
 
    <input type="text" name="number" placeholder= "Phone Number">
@@ -15,6 +15,8 @@
    <button type="submit">Send Text</button>
 
   </form> 
-    
-     
+  <form action= {{url_for('view')}} method = 'get'>
+
+    <button type="submit"> View Conversations </button>
+  </div> 
 {% endblock %}

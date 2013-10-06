@@ -1,12 +1,11 @@
 import re
-
+import itertools
 from flask import Flask
 from flask import render_template
 from flask import url_for
 from flask import request
 
 from chatterbotapi import ChatterBotFactory, ChatterBotType
-
 
 from twilio import twiml
 from twilio.util import TwilioCapability
@@ -112,5 +111,21 @@ def index():
     client = TwilioRestClient(account_sid, account_token);
     message = client.messages.create(body= message, to=number, from_="+16092574790")
   return render_template('index.html',
+            configuration_error=None)
+@app.route('/view')
+def view():
+  number = request.args.get('number', '')
+  params = "" 
+  if number != "":
+    account_sid = "AC3df8076d344e7eac28b16b5f21f7da3f"; 
+    account_token = "10321a0278515f350e3a6965b117e5e7";
+    client = TwilioRestClient(account_sid, account_token);
+    
+    messages = client.messages.list(to=number);
+    messages2 = client.messages.list(from_=number)    
+    messages = reversed(messages)
+    messages2 = reversed(messages2)
+    params = zip(messages, messages2)    
+  return render_template('view.html', params= params,
             configuration_error=None)
 
