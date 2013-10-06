@@ -31,7 +31,7 @@ def sms():
     bot = factory.create(ChatterBotType.CLEVERBOT)
     botSession = bot.create_session()
     
-    text = request.args.get('Body', '') 
+    text = request.form.get('Body', '')
     text = botSession.think(text)
 
     response = twiml.Response()
