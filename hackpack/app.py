@@ -5,6 +5,9 @@ from flask import render_template
 from flask import url_for
 from flask import request
 
+from chatterbotapi import ChatterBotFactory, ChatterBotType
+
+
 from twilio import twiml
 from twilio.util import TwilioCapability
 
@@ -24,9 +27,15 @@ def voice():
 # SMS Request URL
 @app.route('/sms', methods=['GET', 'POST'])
 def sms():
+    factory = ChatterBotfactory()
+    bot = factory.create_session()
+    botSession = bot.create_session()
+    
+    text = request.form['personId']
+    text = botSession.think(text)
+
     response = twiml.Response()
-    response.sms("Congratulations! You deployed the Twilio Hackpack" \
-            " for Heroku and Flask.")
+    response.sms(text)
     return str(response)
 
 
