@@ -1,13 +1,15 @@
 <?php
-	require 'chatterbotapi';
 
-	$factory = new ChatterBotFactory();
+  require_once('/home/a5842996/public_html/chatterbotapi.php');
+
+  $factory = new ChatterBotFactory();
 
 	$bot = $factory->create(ChatterBotType::CLEVERBOT);
+  $botSession = $bot->createSession();
 
 	$text = $_POST["body"];
 
-	$text = $bot->think($text);
+	$text = $botSession->think($text);
 
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 
