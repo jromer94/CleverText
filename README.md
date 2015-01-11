@@ -1,1 +1,1 @@
-A New Friend is a Twilio hack that allows you to text friends and trick them into having conversations with Cleverbot.
+CleverText is a Twilio hack that allows you to text friends and trick them into having conversations with Cleverbot.
